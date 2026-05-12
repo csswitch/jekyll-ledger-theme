@@ -249,12 +249,13 @@
     }
 
     .col-time {
-      width: 70px;
+      width: 90px;
       font-family: $font-number;
       font-size: $text-sm;
       color: $ink-faint;
       text-align: right;
       white-space: nowrap;
+      padding-right: $space-5;
     }
   }
 }
@@ -280,7 +281,7 @@
     &.date  { width: 110px; }
     &.title { flex: 1; }
     &.cat   { width: 130px; }
-    &.time  { width: 70px; text-align: right; }
+    &.time  { width: 90px; text-align: right; padding-right: $space-5; }
   }
 }
 
