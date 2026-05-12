@@ -11,7 +11,9 @@ layout: default
       <span class="ledger-header__label">General Journal — Page {{ paginator.page | default: 1 }} of {{ paginator.total_pages | default: 1 }}</span>
       <h1>{{ site.title }}</h1>
       <div class="ledger-header__meta">
+        {% unless site.author.name == "Your Name" or site.author.name == blank %}
         <span>{{ site.author.name }}{% if site.author.credentials %}, {{ site.author.credentials }}{% endif %}</span>
+        {% endunless %}
         <span>{{ site.description }}</span>
         <span>{{ site.posts.size }} entries</span>
       </div>
@@ -29,7 +31,7 @@ layout: default
     <div class="col-header date">Date</div>
     <div class="col-header title">Description / Entry</div>
     <div class="col-header cat">Account</div>
-    <div class="col-header time">Reading</div>
+    <div class="col-header time">READ</div>
   </div>
   {% endif %}
 
