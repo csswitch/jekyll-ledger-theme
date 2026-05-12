@@ -1,5 +1,13 @@
 # jekyll-ledger-theme
 
+[![License: csswitch Commercial](https://img.shields.io/badge/license-csswitch%20commercial-blue.svg)](./LICENSE)
+[![Buy on Gumroad](https://img.shields.io/badge/Buy-%2449-brightgreen.svg)](https://csswitch.gumroad.com/l/csswitch-ledger)
+[![Live Demo](https://img.shields.io/badge/demo-live-orange.svg)](https://csswitch.github.io/jekyll-ledger-theme/)
+
+> **⚠️ License notice:** This theme is source-available but **not free to use**.  
+> Viewing and learning from the code is welcome. Deploying it on any live site requires a [paid license](https://csswitch.gumroad.com/l/csswitch-ledger).  
+> See [LICENSE](./LICENSE) for full terms.
+
 **The General Ledger** — a Jekyll theme for accountants, CPAs, bookkeepers, and finance writers.
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-csswitch.github.io-1a4731?style=flat-square)](https://csswitch.github.io/jekyll-ledger-theme/)
