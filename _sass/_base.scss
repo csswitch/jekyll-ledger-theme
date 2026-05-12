@@ -1,0 +1,187 @@
+// ============================================================
+// Ledger Theme — Base Styles
+// ============================================================
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-body;
+  font-size: $text-base;
+  line-height: $line-height;
+  color: $ink;
+  background: $paper;
+  min-height: 100vh;
+}
+
+// ── Ledger ruled line background ──────────────────────────
+.ledger-bg {
+  background-color: $paper;
+  background-image:
+    linear-gradient(transparent calc(#{$line-height}rem - 1px), $ruled calc(#{$line-height}rem - 1px)),
+    linear-gradient(transparent calc(#{$line-height}rem - 1px), transparent calc(#{$line-height}rem));
+  background-size: 100% #{$line-height}rem;
+  background-attachment: local;
+}
+
+// ── Links ─────────────────────────────────────────────────
+a {
+  color: $accent-dark;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: $transition;
+  &:hover {
+    color: $accent;
+    border-bottom-color: $accent;
+  }
+}
+
+// ── Headings ──────────────────────────────────────────────
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-display;
+  line-height: $line-height-tight;
+  color: $accent-dark;
+  margin-bottom: $space-4;
+}
+h1 { font-size: $text-3xl; }
+h2 { font-size: $text-2xl; border-bottom: 2px solid $ruled; padding-bottom: $space-2; margin-top: $space-8; }
+h3 { font-size: $text-xl; }
+h4 { font-size: $text-lg; }
+h5, h6 { font-size: $text-base; font-weight: 700; }
+
+// ── Paragraphs ────────────────────────────────────────────
+p { margin-bottom: $space-4; }
+
+// ── Lists ─────────────────────────────────────────────────
+ul, ol { margin: $space-4 0 $space-4 $space-6; }
+li { margin-bottom: $space-1; }
+
+// ── Blockquote ────────────────────────────────────────────
+blockquote {
+  margin: $space-6 0;
+  padding: $space-4 $space-6;
+  border-left: 4px solid $accent;
+  background: $accent-light;
+  border-radius: 0 $radius $radius 0;
+  font-style: italic;
+  color: $accent-dark;
+  p { margin: 0; }
+}
+
+// ── Horizontal rule ───────────────────────────────────────
+hr {
+  border: none;
+  border-top: 2px solid $ruled;
+  margin: $space-8 0;
+  &.double {
+    border-top: 4px double $border-strong;
+  }
+}
+
+// ── Images ────────────────────────────────────────────────
+img { max-width: 100%; height: auto; display: block; }
+
+// ── Code & Pre ────────────────────────────────────────────
+code {
+  font-family: $font-mono;
+  font-size: 0.9em;
+  background: $accent-light;
+  border: 1px solid $ruled;
+  border-radius: $radius-sm;
+  padding: 0.1em 0.4em;
+  color: $accent-dark;
+}
+pre {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  background: $accent-dark;
+  color: #e8f5ed;
+  border: 1px solid $border-strong;
+  border-radius: $radius;
+  padding: $space-5;
+  overflow-x: auto;
+  margin: $space-6 0;
+  line-height: 1.6;
+  code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+  }
+}
+
+// ── Tables ────────────────────────────────────────────────
+// Accountants love tables — give them beautiful ones
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: $space-6 0;
+  font-family: $font-body;
+  font-size: $text-sm;
+
+  th {
+    background: $accent-dark;
+    color: #ffffff;
+    font-family: $font-display;
+    font-weight: 700;
+    text-align: left;
+    padding: $space-3 $space-4;
+    border: 1px solid $accent-mid;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: $text-xs;
+  }
+
+  td {
+    padding: $space-3 $space-4;
+    border: 1px solid $ruled;
+    vertical-align: top;
+
+    &.number, &.amount, &.credit, &.debit {
+      font-family: $font-number;
+      text-align: right;
+    }
+    &.debit  { color: darken(#cc4444, 10%); }
+    &.credit { color: $accent-dark; }
+    &.total  { font-weight: 700; background: $accent-light; border-top: 2px solid $border-strong; }
+  }
+
+  tr:nth-child(even) td { background: rgba($accent-light, 0.5); }
+  tr:hover td { background: $accent-light; }
+
+  caption {
+    text-align: left;
+    font-family: $font-display;
+    font-style: italic;
+    color: $ink-muted;
+    margin-bottom: $space-2;
+    font-size: $text-sm;
+  }
+}
+
+// ── Container ─────────────────────────────────────────────
+.container {
+  max-width: $container;
+  margin: 0 auto;
+  padding: 0 $space-6;
+}
+
+// ── Utility ───────────────────────────────────────────────
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+.number { font-family: $font-number; }
+.text-right { text-align: right; }
+.text-muted { color: $ink-muted; }
+.text-faint { color: $ink-faint; }
+.font-display { font-family: $font-display; }

@@ -1,0 +1,68 @@
+---
+layout: default
+---
+
+{% assign words = content | number_of_words %}
+{% assign reading_time = words | divided_by: 200 | plus: 1 %}
+
+<article class="post container" itemscope itemtype="https://schema.org/BlogPosting">
+
+  <header class="post-header">
+    {% if page.categories.size > 0 or page.tags.size > 0 %}
+    <div class="post-category-line">
+      {% if page.categories.size > 0 %}
+        {% for cat in page.categories %}{{ cat }}{% unless forloop.last %} / {% endunless %}{% endfor %}
+      {% elsif page.tags.size > 0 %}
+        {{ page.tags | first }}
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
+
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: "%B %-d, %Y" }}
+      </time>
+      <span class="meta-separator">●</span>
+      <span>{{ reading_time }} min read</span>
+      {% if page.author %}
+      <span class="meta-separator">●</span>
+      <span itemprop="author">{{ page.author }}</span>
+      {% elsif site.author.name %}
+      <span class="meta-separator">●</span>
+      <span itemprop="author">{{ site.author.name }}{% if site.author.credentials %}, {{ site.author.credentials }}{% endif %}</span>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="post-content ledger-bg" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  <footer class="post-footer">
+    {% if page.tags.size > 0 %}
+    <div class="tags-list" aria-label="Tags">
+      {% for tag in page.tags %}
+      <a href="{{ '/archive/' | relative_url }}#{{ tag | slugify }}">#{{ tag }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <hr class="double" style="margin-top: 2rem;" />
+
+    {% if site.author.name %}
+    <div class="author-card">
+      <div class="author-avatar" aria-hidden="true">
+        {{ site.author.name | slice: 0 }}
+      </div>
+      <div class="author-info">
+        <div class="author-name">{{ site.author.name }}</div>
+        {% if site.author.credentials %}<div class="author-credentials">{{ site.author.credentials }}{% if site.author.firm %} · {{ site.author.firm }}{% endif %}</div>{% endif %}
+        {% if site.author.bio %}<p class="author-bio">{{ site.author.bio }}</p>{% endif %}
+      </div>
+    </div>
+    {% endif %}
+  </footer>
+
+</article>

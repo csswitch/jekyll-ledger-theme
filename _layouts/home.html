@@ -1,0 +1,99 @@
+---
+layout: default
+---
+
+{% assign entry_count = 0 %}
+{% for p in paginator.posts %}{% assign entry_count = entry_count | plus: 1 %}{% endfor %}
+
+<section class="ledger-header">
+  <div class="container">
+    <div class="ledger-header__inner">
+      <span class="ledger-header__label">General Journal — Page {{ paginator.page | default: 1 }} of {{ paginator.total_pages | default: 1 }}</span>
+      <h1>{{ site.title }}</h1>
+      <div class="ledger-header__meta">
+        <span>{{ site.author.name }}{% if site.author.credentials %}, {{ site.author.credentials }}{% endif %}</span>
+        <span>{{ site.description }}</span>
+        <span>{{ site.posts.size }} entries</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  {% if site.ledger.show_column_headers != false %}
+  <div class="ledger-columns">
+    {% if site.ledger.show_entry_numbers != false %}
+    <div class="col-header num">#</div>
+    {% endif %}
+    <div class="col-header date">Date</div>
+    <div class="col-header title">Description / Entry</div>
+    <div class="col-header cat">Account</div>
+    <div class="col-header time">Reading</div>
+  </div>
+  {% endif %}
+
+  <table class="ledger-table" aria-label="Journal entries">
+    <thead class="visually-hidden">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Title</th>
+        <th scope="col">Category</th>
+        <th scope="col">Reading time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% assign row_num = paginator.per_page | default: 10 | times: paginator.page | default: 1 | minus: paginator.per_page | default: 10 %}
+      {% for post in paginator.posts %}
+        {% assign row_num = row_num | plus: 1 %}
+        {% assign words = post.content | number_of_words %}
+        {% assign reading_time = words | divided_by: 200 | plus: 1 %}
+        <tr class="ledger-row">
+          {% if site.ledger.show_entry_numbers != false %}
+          <td class="col-num">{{ row_num }}</td>
+          {% endif %}
+          <td class="col-date">{{ post.date | date: "%d %b %Y" }}</td>
+          <td class="col-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            {% if post.excerpt %}
+            <span class="entry-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</span>
+            {% endif %}
+          </td>
+          <td class="col-category">
+            {% if post.categories.size > 0 %}
+              <span class="tag">{{ post.categories | first }}</span>
+            {% elsif post.tags.size > 0 %}
+              <span class="tag">{{ post.tags | first }}</span>
+            {% else %}
+              <span class="tag">General</span>
+            {% endif %}
+          </td>
+          <td class="col-time">{{ reading_time }} min</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="ledger-summary">
+    <span>Showing entries {{ paginator.page | default: 1 | minus: 1 | times: paginator.per_page | default: 10 | plus: 1 }}–{{ paginator.posts.size | plus: paginator.page | default: 1 | minus: 1 | times: paginator.per_page | default: 10 }} of {{ paginator.total_posts | default: site.posts.size }}</span>
+    <span class="total-entries">Total: {{ site.posts.size }} entries</span>
+  </div>
+
+  {% if paginator.total_pages > 1 %}
+  <nav class="pagination" aria-label="Page navigation">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}">&larr; Newer entries</a>
+    {% else %}
+      <span class="disabled">&larr; Newer entries</span>
+    {% endif %}
+    <span>Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}">Older entries &rarr;</a>
+    {% else %}
+      <span class="disabled">Older entries &rarr;</span>
+    {% endif %}
+  </nav>
+  {% endif %}
+
+</div>

@@ -1,0 +1,578 @@
+// ============================================================
+// Ledger Theme — Layout & Components
+// ============================================================
+
+// ── Site Header ───────────────────────────────────────────
+.site-header {
+  background: $accent-dark;
+  color: #ffffff;
+  border-bottom: 3px double $accent-mid;
+  position: sticky;
+  top: 0;
+  z-index: $z-nav;
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $nav-height;
+    gap: $space-4;
+  }
+
+  .site-logo {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    text-decoration: none;
+    border-bottom: none;
+
+    .logo-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: $paper-aged;
+      border: 2px solid $accent-mid;
+      border-radius: $radius-sm;
+      font-family: $font-number;
+      font-size: $text-xl;
+      color: $accent-dark;
+      font-weight: 900;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      line-height: 1.1;
+
+      .logo-title {
+        display: block;
+        font-family: $font-display;
+        font-size: $text-xl;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.01em;
+      }
+
+      .logo-subtitle {
+        display: block;
+        font-size: $text-xs;
+        color: rgba(255,255,255,0.65);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+
+    a {
+      font-size: $text-sm;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      padding: $space-2 $space-3;
+      border-radius: $radius-sm;
+      border-bottom: none;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: $transition;
+
+      &:hover, &.active {
+        background: rgba(255,255,255,0.12);
+        color: #ffffff;
+      }
+    }
+  }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: $radius-sm;
+    color: #ffffff;
+    padding: $space-2 $space-3;
+    cursor: pointer;
+    font-size: $text-sm;
+  }
+}
+
+// ── Ledger Header Banner ───────────────────────────────────
+// Decorative section header styled like a ledger page heading
+.ledger-header {
+  background: $paper-aged;
+  border-bottom: 3px double $border-strong;
+  padding: $space-10 0 $space-8;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(transparent calc(#{$line-height}rem - 1px), $ruled calc(#{$line-height}rem - 1px));
+    background-size: 100% #{$line-height}rem;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .ledger-header__inner { position: relative; z-index: 1; }
+
+  .ledger-header__label {
+    display: inline-block;
+    font-family: $font-mono;
+    font-size: $text-xs;
+    color: $ink-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border-bottom: 1px solid $border;
+    padding-bottom: $space-1;
+    margin-bottom: $space-3;
+  }
+
+  h1 {
+    font-family: $font-display;
+    font-size: $text-3xl;
+    color: $accent-dark;
+    margin-bottom: $space-2;
+  }
+
+  .ledger-header__meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-4;
+    font-size: $text-sm;
+    color: $ink-muted;
+    font-family: $font-mono;
+
+    span::before { content: '·'; margin-right: $space-4; }
+    span:first-child::before { display: none; }
+  }
+}
+
+// ── Main Content ──────────────────────────────────────────
+.site-main {
+  padding: $space-10 0;
+  min-height: calc(100vh - #{$nav-height} - 200px);
+}
+
+// ── Ledger Post List ──────────────────────────────────────
+// Styled like a columnar accounting ledger
+.ledger-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: $space-6 0;
+
+  .ledger-table__head th {
+    background: $accent-dark;
+    color: rgba(255,255,255,0.9);
+    font-family: $font-mono;
+    font-size: $text-xs;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: $space-2 $space-4;
+    border: 1px solid $accent-mid;
+    white-space: nowrap;
+  }
+
+  .ledger-row {
+    border-bottom: 1px solid $ruled;
+    transition: $transition;
+    background: transparent;
+
+    &:nth-child(even) td { background: rgba($accent-light, 0.4); }
+    &:hover td { background: $accent-light; }
+
+    td {
+      padding: $space-3 $space-4;
+      vertical-align: top;
+      border: none;
+      border-bottom: 1px solid $ruled;
+    }
+
+    .col-num {
+      font-family: $font-number;
+      color: $ink-faint;
+      font-size: $text-xs;
+      width: 40px;
+      text-align: right;
+      padding-right: $space-3;
+    }
+
+    .col-date {
+      font-family: $font-number;
+      font-size: $text-sm;
+      color: $ink-muted;
+      white-space: nowrap;
+      width: 110px;
+    }
+
+    .col-title {
+      a {
+        font-family: $font-display;
+        font-size: $text-lg;
+        font-weight: 700;
+        color: $accent-dark;
+        border-bottom: 1px solid transparent;
+        &:hover { border-bottom-color: $accent; }
+      }
+      .entry-excerpt {
+        display: block;
+        font-size: $text-sm;
+        color: $ink-muted;
+        margin-top: $space-1;
+        line-height: 1.5;
+      }
+    }
+
+    .col-category {
+      width: 130px;
+      .tag {
+        display: inline-block;
+        font-family: $font-mono;
+        font-size: $text-xs;
+        background: $accent-light;
+        border: 1px solid $ruled;
+        color: $accent-dark;
+        border-radius: $radius-sm;
+        padding: 0.15em 0.5em;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+    }
+
+    .col-time {
+      width: 70px;
+      font-family: $font-number;
+      font-size: $text-sm;
+      color: $ink-faint;
+      text-align: right;
+      white-space: nowrap;
+    }
+  }
+}
+
+// ── Column headers row ────────────────────────────────────
+.ledger-columns {
+  display: flex;
+  gap: 0;
+  border-top: 2px solid $border-strong;
+  border-bottom: 2px solid $border-strong;
+  background: $accent-dark;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.9);
+  font-weight: 700;
+  margin-bottom: 0;
+
+  .col-header {
+    padding: $space-2 $space-4;
+    &.num   { width: 40px; text-align: right; }
+    &.date  { width: 110px; }
+    &.title { flex: 1; }
+    &.cat   { width: 130px; }
+    &.time  { width: 70px; text-align: right; }
+  }
+}
+
+// ── Balance summary box ───────────────────────────────────
+.ledger-summary {
+  background: $accent-light;
+  border: 1px solid $ruled;
+  border-top: 3px solid $accent;
+  border-radius: 0 0 $radius $radius;
+  padding: $space-4 $space-6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $ink-muted;
+  margin-top: 0;
+
+  .total-entries {
+    font-weight: 700;
+    color: $accent-dark;
+  }
+}
+
+// ── Article / Post ────────────────────────────────────────
+.post {
+  max-width: $container;
+  margin: 0 auto;
+
+  .post-header {
+    padding: $space-10 0 $space-8;
+    border-bottom: 3px double $border-strong;
+    margin-bottom: $space-8;
+
+    .post-category-line {
+      font-family: $font-mono;
+      font-size: $text-xs;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: $accent-mid;
+      margin-bottom: $space-3;
+    }
+
+    .post-title {
+      font-family: $font-display;
+      font-size: $text-3xl;
+      color: $accent-dark;
+      line-height: 1.2;
+      margin-bottom: $space-4;
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: $space-4;
+      flex-wrap: wrap;
+      font-family: $font-mono;
+      font-size: $text-sm;
+      color: $ink-muted;
+
+      .meta-separator {
+        color: $ink-faint;
+        font-size: 0.6em;
+        line-height: 1;
+      }
+    }
+  }
+
+  .post-content {
+    h2, h3, h4 { margin-top: $space-10; }
+    img {
+      border: 1px solid $border;
+      border-radius: $radius;
+      margin: $space-6 auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+  }
+
+  .post-footer {
+    margin-top: $space-12;
+    padding-top: $space-8;
+    border-top: 3px double $border-strong;
+
+    .tags-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $space-2;
+
+      a {
+        font-family: $font-mono;
+        font-size: $text-xs;
+        background: $accent-light;
+        border: 1px solid $ruled;
+        color: $accent-dark;
+        border-radius: $radius-sm;
+        padding: 0.25em 0.75em;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        border-bottom: none;
+        &:hover { background: $accent; color: #fff; border-color: $accent; }
+      }
+    }
+  }
+}
+
+// ── Author card ───────────────────────────────────────────
+.author-card {
+  display: flex;
+  gap: $space-5;
+  align-items: flex-start;
+  background: $paper-aged;
+  border: 1px solid $border;
+  border-left: 4px solid $accent;
+  border-radius: $radius;
+  padding: $space-6;
+  margin-top: $space-8;
+
+  .author-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 3px solid $ruled;
+    flex-shrink: 0;
+    background: $accent-light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-display;
+    font-size: $text-2xl;
+    color: $accent-dark;
+    font-weight: 700;
+  }
+
+  .author-info {
+    .author-name {
+      font-family: $font-display;
+      font-size: $text-xl;
+      font-weight: 700;
+      color: $accent-dark;
+    }
+    .author-credentials {
+      font-family: $font-mono;
+      font-size: $text-sm;
+      color: $accent;
+      margin-bottom: $space-2;
+    }
+    .author-bio {
+      font-size: $text-sm;
+      color: $ink-muted;
+      margin: 0;
+    }
+  }
+}
+
+// ── Pagination ────────────────────────────────────────────
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-4 0;
+  border-top: 1px solid $ruled;
+  margin-top: $space-6;
+  font-family: $font-mono;
+  font-size: $text-sm;
+
+  a, span {
+    padding: $space-2 $space-4;
+    border: 1px solid $ruled;
+    border-radius: $radius-sm;
+    color: $accent-dark;
+    border-bottom: 1px solid $ruled;
+    text-decoration: none;
+    transition: $transition;
+    &:hover { background: $accent-light; border-color: $accent; }
+  }
+  .disabled, span { color: $ink-faint; pointer-events: none; }
+}
+
+// ── Page (generic) ────────────────────────────────────────
+.page-content {
+  max-width: $container;
+  margin: 0 auto;
+}
+
+// ── Site Footer ───────────────────────────────────────────
+.site-footer {
+  background: $accent-dark;
+  color: rgba(255,255,255,0.7);
+  border-top: 3px double $accent-mid;
+  padding: $space-8 0 $space-6;
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-4;
+    text-align: center;
+  }
+
+  .footer-brand {
+    font-family: $font-display;
+    font-size: $text-xl;
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .footer-credentials {
+    font-family: $font-mono;
+    font-size: $text-xs;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: $space-5;
+    flex-wrap: wrap;
+    justify-content: center;
+    a {
+      color: rgba(255,255,255,0.6);
+      font-size: $text-sm;
+      border-bottom: none;
+      &:hover { color: #fff; }
+    }
+  }
+
+  .footer-legal {
+    font-size: $text-xs;
+    color: rgba(255,255,255,0.35);
+    font-family: $font-mono;
+  }
+}
+
+// ── Callout / Notice boxes ────────────────────────────────
+.notice {
+  padding: $space-4 $space-5;
+  border-radius: $radius;
+  margin: $space-6 0;
+  font-size: $text-sm;
+  border-left: 4px solid;
+
+  &--info   { background: $accent-light; border-color: $accent; color: $accent-dark; }
+  &--note   { background: #fff8e1;        border-color: #f0a030; color: #5a3a00; }
+  &--warning{ background: #fff0f0;        border-color: #cc4444; color: #5a0000; }
+  &--tip    { background: #f0f8ff;        border-color: #3a7abf; color: #0f2d5a; }
+
+  strong { display: block; margin-bottom: $space-1; font-weight: 700; }
+}
+
+// ── Responsive ────────────────────────────────────────────
+@media (max-width: 640px) {
+  .site-header {
+    nav { display: none; flex-direction: column; gap: 0; }
+    nav.open { display: flex; }
+    .nav-toggle { display: block; }
+  }
+
+  .ledger-table .col-category,
+  .ledger-table .col-time,
+  .ledger-table .col-num { display: none; }
+
+  .ledger-columns .col-header.cat,
+  .ledger-columns .col-header.time,
+  .ledger-columns .col-header.num { display: none; }
+
+  .author-card { flex-direction: column; }
+}
+
+// ── Print stylesheet ──────────────────────────────────────
+@media print {
+  .site-header, .site-footer, .pagination, .nav-toggle { display: none !important; }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt;
+  }
+
+  .ledger-bg { background-image: none; }
+
+  h2 { border-bottom: 1pt solid #000; }
+  a { color: #000; text-decoration: underline; }
+
+  table {
+    page-break-inside: avoid;
+    th { background: #eee !important; color: #000 !important; border: 1pt solid #000 !important; }
+    td { border: 1pt solid #ccc !important; }
+  }
+
+  .post-header { border-bottom: 2pt solid #000; }
+
+  .site-main { padding: 0; }
+  .container { max-width: 100%; padding: 0; }
+}

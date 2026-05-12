@@ -1,0 +1,58 @@
+title: "The General Ledger"
+description: "Insights on accounting, finance, and numbers that matter."
+url: "https://csswitch.github.io"
+baseurl: "/jekyll-ledger-theme"
+author:
+  name: "Your Name"
+  email: "you@example.com"
+  credentials: "CPA"
+  firm: "Your Firm"
+  github: ""
+  twitter: ""
+  linkedin: ""
+
+ledger:
+  # Accent color: "green" | "navy" | "burgundy" | "slate"
+  accent: "green"
+  # Show column headers on post list (Date | Entry | Category | Time)
+  show_column_headers: true
+  # Show running entry numbers on post list
+  show_entry_numbers: true
+  # Enable print stylesheet
+  print_ready: true
+  # Tagline under site title
+  tagline: "A Professional Finance Blog"
+  # Firm/practice name in footer
+  show_firm: true
+
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+timezone: UTC
+paginate: 10
+paginate_path: "/page:num/"
+
+plugins:
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
