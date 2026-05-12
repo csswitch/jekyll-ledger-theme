@@ -65,7 +65,7 @@ A balance sheet heavy in cash and receivables is generally more flexible than on
 ## A Minimal Example
 
 | Assets | £ | Liabilities & Equity | £ |
-|--------|---|----------------------|---|
+|--------|--:|----------------------|--:|
 | Cash | 25,000 | Accounts payable | 12,000 |
 | Receivables | 18,000 | Short-term loan | 8,000 |
 | Inventory | 10,000 | Long-term debt | 15,000 |
