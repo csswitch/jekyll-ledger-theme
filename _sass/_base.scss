@@ -152,7 +152,10 @@ table {
   }
 
   tr:nth-child(even) td { background: rgba($accent-light, 0.5); }
-  tr:hover td { background: $accent-light; }
+  tr:hover td {
+    background: darken($accent-light, 6%);
+    border-color: darken($ruled, 15%);
+  }
 
   caption {
     text-align: left;
